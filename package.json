@@ -1,6 +1,5 @@
 {
   "name": "metamarketingdao",
-  "homepage": "http://metamarketingdao.github.io/metamarketingdao/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
