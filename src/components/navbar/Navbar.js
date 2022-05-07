@@ -254,7 +254,7 @@ export default function Navbar() {
         <Tab label={<div className="icon_nav"><Ai.AiFillDashboard className='icon_nav_main'/> Dashboard</div>} {...a11yProps(0)} />
         <Tab label={<div className="icon_nav"><Ai.AiFillAccountBook className='icon_nav_main'/> Account</div>}  {...a11yProps(1)} />
         <Tab label={<div className="icon_nav"><Ai.AiFillThunderbolt className='icon_nav_main'/> Stake</div>}  {...a11yProps(4)} />
-        <a href={docsUrl} target="_blank"><div className='icon_nav'><Ai.AiOutlineGlobal className='icon_nav_main'/><h2 className='swap swap_size'>Website</h2></div></a>
+        <a href={websiteUrl} target="_blank"><div className='icon_nav'><Ai.AiOutlineGlobal className='icon_nav_main'/><h2 className='swap swap_size'>Website</h2></div></a>
         <div className='socials'>
         <a href="https://t.me/MetaMarketingDAO"> <FaTelegram className='social_icon'/></a>
         <a href="https://twitter.com/MetaMktingDAO"> <Ai.AiFillTwitterCircle className='social_icon'/> </a>
