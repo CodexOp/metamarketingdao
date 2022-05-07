@@ -1,0 +1,191 @@
+#headlessui-disclosure-panel-2, #headlessui-disclosure-panel-6{
+    height: 100vh !important;
+    position: fixed;
+    background: rgba(0,0,0,0.3);
+    width: 70% !important;
+    top:0;
+    padding-top: 30px;
+    border-right: 2px solid rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    }
+    
+
+.left_content{
+padding-top:50px !important;
+}
+
+
+    .swap_size{
+        font-size: 230px !important;
+    }
+    
+    
+    .icon_nav_main{
+        color: #cacaca;
+        font-size: 26px;
+    }
+
+    .socials{
+        display: flex;
+        margin: auto;
+        gap:20px;
+        margin-top: 15px;
+        margin-top:10% !important;
+
+    }
+
+    .icon_nav{
+        font-size: 24px !important;
+    }
+
+
+
+    .social_icon{
+        color: rgba($color: #fff, $alpha: 0.9);
+        font-size: 36px;
+        margin-top: 50px;
+        
+    }
+    
+
+    #headlessui-disclosure-panel-2, .trui{
+        position: relative;
+    }
+    
+      .icon_nav{
+          display: flex;
+          gap:10px;
+          text-align: left;
+          justify-content: center;
+          align-items: center;
+      }
+    
+    
+    .navbar{
+        position: sticky;
+        background: #000 !important;
+        top: 0;
+        width: 100%;
+    }
+    
+    
+    #vertical-tab-2, #vertical-tab-3,#vertical-tab-4, #vertical-tab-1, #vertical-tab-0, .swap {
+        font-size: 24px !important; 
+        margin-bottom: 10px !important;
+        color: #cacaca;
+        font-weight: 700 !important;
+        max-width: none !important;
+        text-align: center;
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+     .Mui-selected{
+        color: rgba(113, 41, 216, 1) !important;
+        opacity: 0.8;
+    }
+    
+    
+    .css-35zqo5-MuiTabs-root{
+        display: none !important;
+        
+    }
+    
+    .MuiBox-root{
+        background: transparent !important;
+    }
+    
+    .tab{
+        font-size: 20px;
+    }
+    
+    
+    
+    .button_close{
+        z-index: 1000;
+        transition: all 300ms ease-in-out;
+    
+    }
+    
+    .MuiTabs-indicator{
+        display: none;
+    }
+    
+    
+    .logo{
+        width: 150px;
+        margin: auto;
+        margin-bottom: 40px;
+    }
+    
+    
+    
+    #vertical-tabpanel-1, #vertical-tabpanel-2, #vertical-tabpanel-2, #vertical-tabpanel-3, #vertical-tabpanel-0{
+        width: 100% !important;
+    }
+    
+    @media (min-width:1024px){
+        
+    .css-35zqo5-MuiTabs-root{
+        display: block !important;
+        height: 100vh;
+        padding-top: 40px;
+        margin-top: -5rem;
+        width: 100%;
+        z-index: 10;
+    }
+
+    .socials{
+        display: flex;
+        margin: auto;
+        gap:20px;
+        margin-top: 15px;
+        margin-top:20% !important;
+
+    }
+
+    
+    
+    .logo{
+        width: 150px;
+        margin: auto;
+        margin-bottom: 80px;
+    }
+    
+    
+    .left_navbar{
+        display: block !important;
+        height: 100vh;
+        position: static;   
+        margin-top: -5rem;
+        width: 20%;
+        z-index: 10;
+    }
+    
+    
+    .trui{
+        position: fixed;
+        padding-top: 40px;
+        border-right: 2px solid rgba(255,255,255,0.5) !important;
+        width: 20%;
+    
+    
+    }
+    
+    
+    .css-1cgx7kx-MuiTabs-scroller{
+        width: 100%;
+    }
+    
+
+    }
+
+
+
+    
