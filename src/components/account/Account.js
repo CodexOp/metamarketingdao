@@ -15,7 +15,6 @@ const Account = () => {
     try{
       getPrice()
       getBalance()
-      getRebaseTime();
     } catch (error) {
       console.log(error);
     }
@@ -67,33 +66,7 @@ const Account = () => {
     }
   }
 
-  async function getRebaseTime (){
-    let rpcUrl = "https://bsc-dataseed1.defibit.io/";
-    let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
-    let token = new ethers.Contract(
-      '0x4AeC6456B758f7eE4d12383cadEfD65de5312Df1',
-      tokenAbi,
-      provider_
-    );
-    let time = await token._lastRebasedTime();
-    let timestamp = new Date().getTime();
-    timestamp = (timestamp/1000).toFixed(0);
-    console.log("Time", time.toString(), timestamp);
-    time = timestamp- parseInt(time.toString());
-    time = (15*60) - time;
-    if (time<0) time = timestamp;
-    setRebaseTime(time);
-    
-    let updateTime = setInterval(() => {
-      setRebaseTime((value) => {
-        if (value <=0)return 0;
-        return value -1;
-      });
-    }, 1000);
-  }
-
-
-
+  
 
   return (
     <div className='container'>
@@ -109,121 +82,39 @@ const Account = () => {
              <h2>${balance* (parseFloat(price).toFixed(2))}</h2>
             </div>
             <div className='card_title'>
-            <h2>{balance} AMBR</h2></div>
+            <h2>{balance} MMD</h2></div>
           </div>
       </div>
 
       <div className='inner_block3'>
         <div className='dashboard-card'>
             <div className='card_title'>
-            <h2>APY</h2>
+            <h2>Total Supply</h2>
             </div>
             <div className="card_value card_value_acc">
-             <h2>388,047%</h2>
+             <h2>231241234123</h2>
             </div>
             <div className='card_title'>
-              <h2>Daild ROI 2.289%</h2>
+              <h2>MMD Token</h2>
             </div>
           </div>
       </div>
         <div className='inner_block3'>
         <div className='dashboard-card'>
             <div className='card_title'>
-            <h2>Next Rebase</h2>
+            <h2>Total Balance</h2>
             </div>
             <div className="card_value card_value_acc">
-             <h2>00:{parseInt(rebaseTime/60)%15}:{rebaseTime%60}</h2>
+             <h2>234500</h2>
             </div>
             <div className='card_title'>
-            <h2>You will earn money soon</h2></div>
+            <h2>Your Total Token Balance </h2></div>
           </div>
       </div>
 
       </div>
-      <div className='block4 account_info_block'>
-          <div className="row">
-            <div className='title_card'>
-                <h2>Current AMBR Price</h2>
-            </div>
+     
 
-            <div className='value'>
-            <h2>${parseFloat(price).toFixed(2)}</h2>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className='title_card'>
-            <h2>Next Reward Amount</h2>
-            </div>
-
-            <div className='value'>
-            <h2>{0.0002358 * parseFloat(balance)} AMBR</h2>
-            </div>
-          </div>
-
-
-
-          <div className="row">
-            <div className='title_card'>
-                <h2>Reward Amount USD</h2>
-            </div>
-
-            <div className='value'>
-            <h2>${0.0002358 * parseFloat(balance)* parseFloat(price).toFixed(2)}</h2>
-            </div>
-          </div>
-
-
-
-          <div className="row">
-            <div className='title_card'>
-            <h2>Next Reward Yield</h2>
-            </div>
-
-            <div className='value'>
-            <h2>0.02358%</h2>
-            </div>
-          </div>
-
-
-
-          <div className="row">
-            <div className='title_card'>
-        <h2>ROI(1-Day Rate) USD</h2>
-            </div>
-
-            <div className='value'>
-            <h2>${(0.02289 * balance * (parseFloat(price).toFixed(2))).toFixed(6)}</h2>
-            </div>
-          </div>
-
-
-
-          <div className="row">
-            <div className='title_card'>
-            <h2>ROI(5-Day Rate)</h2>
-            </div>
-
-            <div className='value'>
-            <h2>11.982%</h2>
-            </div>
-          </div>
-
-
-
-          <div className="row">
-            <div className='title_card'>
-            <h2>ROI(5-Day Rate) USD</h2>
-            </div>
-
-            <div className='value'>
-            <h2>${(0.11982 * balance * (parseFloat(price).toFixed(2))).toFixed(4)}</h2>
-            </div>
-          </div>
-
-
-
-      </div>
     </div>
   )
 }

@@ -11,6 +11,142 @@
     }
     
 
+    .buynowbutton{
+display: none; 
+padding: 0.5rem; 
+padding-left: 1rem;
+font-size: 18px;
+padding-right: 1rem; 
+transition-duration: 300ms; 
+font-weight: 600; 
+border-radius: 0.5rem; 
+
+@media (min-width: 640px) { 
+  display: block; 
+ }
+
+    }
+
+
+    .buttonblock{
+    display: flex; 
+position: absolute; 
+top: 0;
+bottom: 0; 
+right: 0; 
+padding-right: 0.5rem; 
+display: flex; 
+justify-content: end;
+align-items: center;
+
+margin-right: 30px; 
+
+
+}
+
+
+.connect_button{
+padding: 0.5rem; 
+padding-left: 1rem;
+padding-right: 1rem; 
+margin-left: 0.5rem; 
+transition-duration: 300ms; 
+font-weight: 600; 
+font-size: 18px;
+background-color: rgba(113, 41, 216, 0.9);
+color: #fff;
+border: 0;
+outline: none;
+border-radius: 0.5rem; 
+
+
+}
+
+
+a{
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+    .trui  {
+
+
+        a{
+            width: 100%;
+        justify-content: center;
+        display: flex;
+        }
+    }
+
+    .logoimg{
+        display: block; 
+        padding-left: 2.5rem; 
+        width: auto; 
+        height: 2rem; 
+        margin-left: 20px;
+        
+        
+        
+        @media (min-width: 1024px) { 
+          display: none; 
+         }
+        
+            }
+
+    .menu{
+        width: 40px;
+        background: transparent;
+        outline: none;
+        border: none;
+        color: #fff;
+        margin-left: 15px;
+
+    }
+
+    .navbar{
+        height: 80px;
+    }
+
+    .panel{
+        position: fixed;
+    top: 0;
+    left: 0;
+}
+    
+
+    .logo_mob{
+        display: flex;
+    align-items: center;
+    height: 80px !important;
+    }
+
+    .logo-container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .navbutton{
+        display: flex; 
+        position: absolute; 
+        top: 0;
+        bottom: 0; 
+        left: 0; 
+        display: flex; 
+        align-items: center; 
+        
+        
+        
+        @media (min-width: 1024px) { 
+          display: none; 
+         }
+        
+        
+            }
+
 .left_content{
 padding-top:50px !important;
 }
@@ -50,8 +186,10 @@ padding-top:50px !important;
     
 
     #headlessui-disclosure-panel-2, .trui{
-        position: absolute;
-    }
+        position: fixed;
+        top: 0;
+        left: 0;
+    }    
     
       .icon_nav{
           display: flex;
@@ -150,12 +288,14 @@ padding-top:50px !important;
 
     }
 
+
     
     
     .logo{
-        width: 150px;
+        width: 120px !important;
         margin: auto;
         margin-bottom: 80px;
+        margin-top: 50px !important;
     }
     
     
