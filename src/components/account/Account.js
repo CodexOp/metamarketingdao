@@ -1,8 +1,8 @@
 import * as React from 'react'
 import './account.scss'
 import { ethers } from "ethers";
-import routerAbi from '../../routerAbi.json';
-import tokenAbi from '../../tokenAbi.json';
+import routerAbi from '../../abi/router.json'
+import tokenAbi from '../../abi/token.json'
 
 const Account = () => {
 

@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import "./navbar.scss"
-import * as React from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Web3Modal from "web3modal";
@@ -14,15 +14,17 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import Dash from '../dashboard/Dash';
 import logo from '../../images/logo.png'
 import Account from '../account/Account';
-import routerAbi from '../../routerAbi.json';
 import Stake from '../stake/Stake';
 import * as Ai from 'react-icons/ai';
-import {myaddress} from '../../App.js';
 import {FaDiscord, FaTelegram, FaTelegramPlane} from 'react-icons/fa'
+import {provider, setProvider, signer, setSigner} from '../../App';
+import values from "../../values.json"
 
 
 function TabPanel(props) {
+
   const { children, value, index, ...other } = props;
+
  
   return (
     <div
@@ -69,13 +71,87 @@ const navigation = [
 
 
 export default function Navbar(props) {
-  const walletaddress = React.useContext(myaddress)
+
+  let [address, setAddress]= useState("Connect");
+  let [active, setActive]= useState("active_logout");
+
+  let [connectedWallet, setConnectedWallet] = React.useState(false);
+  let [walletAddress, setWalletAddress] = React.useState("Connect");
+
+
+  let _provider = React.useContext (provider);
+  let _setProvider = React.useContext (setProvider);
+  let _signer = React.useContext (signer);
+  let _setSigner = React.useContext (setSigner);
+
+  const web3ModalRef = useRef(); // return the object with key named current
+
+
+  useEffect(() => {
+    web3ModalRef.current = new Web3Modal({
+      network: "binance",
+      providerOptions: {
+        walletconnect: {
+          package: WalletConnectProvider, // required
+          options: {
+            rpc: {
+              56: values.rpcUrl
+            } // required
+          }
+        }
+      },
+    });
+
+  }, []);
+
+  useEffect(()=>{
+    
+  }, [_provider, _signer]);
+
 
     const [value, setValue] = React.useState(0);
     const [close, setclose] = React.useState();
 
     React.useEffect(() => {
     }, []);
+
+    const connectWallet = async () => {
+      try {
+        await getSignerOrProvider(true);
+      } catch (error) {
+        console.log(" error Bhai", error);
+      }
+    };
+  
+    const getSignerOrProvider = async (needSigner = false) => {
+      try{
+        const _provider = new providers.JsonRpcProvider(values.rpcUrl);
+        _setProvider(_provider);
+        const provider = await web3ModalRef.current.connect();
+        const web3Provider = new providers.Web3Provider(provider);
+        const { chainId } = await web3Provider.getNetwork();
+        console.log ("ChainId: ", chainId);
+        // if (chainId !== 4) {
+        //   alert("USE RINKEEBY NETWORK");
+        //   throw new Error("Change network to Rinkeby");
+        // }
+        if (needSigner) {
+          const signer = web3Provider.getSigner();
+          _setSigner(signer)
+          let temp = await signer.getAddress();
+          setWalletAddress(temp.toString());
+        }
+        setConnectedWallet(true);
+        provider.on("accountsChanged", (accounts) => {
+          console.log(accounts);
+          connectWallet();
+        });
+      } catch (error) {
+        console.log (error);
+        const provider = new providers.JsonRpcProvider(values.rpcUrl);
+        _setProvider(provider);
+      }
+    };
 
     let websiteUrl = "http://metamarketingdao.com/";
 
@@ -124,8 +200,10 @@ export default function Navbar(props) {
                 >Buy Now</a>
                 <button
                 className='connect_button'
-                onClick= {props.walletconnect}
-                >{walletaddress ? walletaddress.slice(0,7) : "Connect"}</button>
+                onClick= {connectWallet}
+                >{(connectedWallet)? <>{walletAddress.slice(0, 6) + "..."}</>
+                :
+                <>Connect</>}</button>
               </div>
             </div>
           </div>
