@@ -1,9 +1,230 @@
 import React from 'react';
 import './stake.css';
 import Progress from 'react-progressbar';
+import { ethers, providers } from "ethers";
+import values from "../../values.json"
+import stakingAbi from '../../abi/staking.json';
+import tokenAbi from '../../abi/token.json';
+import {provider, setProvider, signer, setSigner} from '../../App';
 
 
 const Stake = () => {
+  let [poolId, setPoolId] = React.useState(0);
+  let [poolInfo, setPoolInfo] = React.useState([]);
+  let [userInfo, setUserInfo] = React.useState([]);
+  let [whitelistedAddresses, setWalletAddresses] = React.useState([]);
+  let [amount, setAmount] = React.useState(0);
+  let [balance, setBalance] = React.useState(0);
+  let [stakingBalance, setStackingBalance] = React.useState(0);
+  let [currentPoolSize, setCurrentPoolSize] = React.useState(0);
+  let [maxPoolSize, setMaxPoolSize] = React.useState(0);
+  let [timeLock, setTimeLock] = React.useState(0);
+
+  let _provider = React.useContext (provider);
+  let _setProvider = React.useContext (setProvider);
+  let _signer = React.useContext (signer);
+  let _setSigner = React.useContext (setSigner);
+
+  React.useEffect(()=>{
+    getPoolInfo();
+    getUserInfo();
+    getWhiteListAddresses();
+    
+    async function fetch (){
+      try{
+        let _balance = await _getBalance(values.token);
+        console.log("BAlance", _balance);
+        setBalance(_balance);
+      }catch (err){
+        console.log("Error", err);
+      }
+    }
+    fetch();
+  }, [_provider, _signer, poolId]);
+
+  async function getPoolInfo (){
+    try{
+      let rpcUrl = values.rpcUrl;
+      let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
+      let staking = new ethers.Contract(
+        values.stakingAddress,
+        stakingAbi,
+        provider_
+      );
+      var _poolInfo = await staking.poolInfo(poolId);
+      console.log ("Pool Info: ", _poolInfo);
+      setPoolInfo(_poolInfo);
+      let temp = ethers.utils.formatUnits(_poolInfo[2].toString(), 9).toString()
+      console.log ("temp: ", temp, " value: ", _poolInfo[2].toString());
+      setCurrentPoolSize(temp);
+      temp = ethers.utils.formatUnits(_poolInfo[1].toString(), 9).toString()
+      setMaxPoolSize(temp)
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  async function getUserInfo (){
+    try{
+      let rpcUrl = values.rpcUrl;
+      let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
+      let staking = new ethers.Contract(
+        values.stakingAddress,
+        stakingAbi,
+        provider_
+      );
+      let _wallet = _signer.getAddress();      
+      let _userInfo = await staking.userInfo( poolId, _wallet);
+      console.log ("USER Info: ", _userInfo);
+      setStackingBalance(ethers.utils.formatUnits(_userInfo[0], 9).toString())
+      setUserInfo(_userInfo);
+      let _timestamp = parseInt(_userInfo[1].toString())* 1000;
+      let _time = new Date(_timestamp);
+      if (_timestamp >0) setTimeLock(_time);
+      else setTimeLock(" Not staked yet");
+    }catch(err){
+      console.log("User error", err);
+    }
+  }
+
+  async function _getBalance (tokenAddress, accountAddress){
+    try {
+      let rpcUrl = values.rpcUrl;
+      let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
+      let token = new ethers.Contract(
+        tokenAddress,
+        tokenAbi,
+        provider_
+      );
+      if (!accountAddress){
+        accountAddress = await _signer.getAddress();
+      }
+      let balance = await token.balanceOf (accountAddress);
+      console.log ("Balalala", balance)
+      let decimals = await token.decimals();
+      decimals = parseInt(decimals.toString());
+      balance = ethers.utils.formatUnits(balance, decimals);
+      return parseFloat(balance.toString()).toFixed(2);
+    } catch (err){
+      console.log (err, tokenAddress);
+      return 0;
+    }
+  }
+
+  async function getWhiteListAddresses (){
+    try{
+      let rpcUrl = values.rpcUrl;
+      let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
+      let staking = new ethers.Contract(
+        values.stakingAddress,
+        stakingAbi,
+        provider_
+      );
+      let _wallet = _signer.getAddress();      
+      let _wlInfo = await staking.whitelistedAddress( poolId, _wallet);
+      console.log ("Whitelist Info: ", _wlInfo);
+      setWalletAddresses(_wlInfo);
+    }catch(err){
+      console.log("User error", err);
+    }
+  }
+
+  async function stakeTokens () {
+    try{
+      let staking = new ethers.Contract(
+        values.stakingAddress,
+        stakingAbi,
+        _signer
+      );
+      let _amount = ethers.utils.parseUnits(amount.toString(), 9);
+      // console.log (_amount)
+      let tx = await staking.stakeTokens(poolId, _amount);
+      await tx.wait();
+      getPoolInfo();
+      getUserInfo();
+    }catch (error) {
+      if (error.data)
+      alert(error.data.message);
+      console.log (error)
+    }
+  }
+
+  async function unstakeTokens () {
+    try{
+      let staking = new ethers.Contract(
+        values.stakingAddress,
+        stakingAbi,
+        _signer
+      );
+      let tx = await staking.unstakeTokens(poolId);
+      await tx.wait();
+      getPoolInfo();
+      getUserInfo();
+    }catch (error) {
+      if (error.data)
+      alert(error.data.message);
+      console.log (error);
+    }
+  }
+
+  async function claimTokens () {
+    try{
+      let staking = new ethers.Contract(
+        values.stakingAddress,
+        stakingAbi,
+        _signer
+      );
+      let tx = await staking.claimTokens(poolId);
+      await tx.wait();
+      getPoolInfo();
+      getUserInfo();
+    }catch (error) {
+      if (error.data)
+      alert(error.data.message);
+      console.log (error);
+    }
+  }
+
+  async function emergencyWithdraw () {
+    try{
+      let staking = new ethers.Contract(
+        values.stakingAddress,
+        stakingAbi,
+        _signer
+      );
+      let tx = await staking.emergencyWithdraw(poolId);
+      await tx.wait();
+      getPoolInfo();
+      getUserInfo();
+    }catch (error) {
+      if (error.data)
+      alert (error.data.message);
+      console.log (error);
+    }
+  }
+
+  async function approve () {
+    try{
+      let token = new ethers.Contract(
+        values.token,
+        tokenAbi,
+        _signer
+      );
+      let _amount = ethers.utils.parseUnits("10000000000000000000", 9);
+      let tx = await token.approve(values.stakingAddress, _amount);
+      await tx.wait();
+      stakeTokens()
+    }catch (error) {
+      // alert(error.data.message);
+    }
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setAmount(value);
+    // console.log (amount);
+  }
+
   return (
     <div>
 
@@ -13,13 +234,13 @@ const Stake = () => {
                 <h2>STAKE YOUR TOKEN</h2>
             </div>
             <div className='stak_bar'>
-            <Progress color="rgba(113, 41, 216, 0.9)" completed={75} height={20} data-label={`75% Pool Filled`} />
+            <Progress color="rgba(113, 41, 216, 0.9)" completed={(parseFloat(currentPoolSize)* 100)/parseFloat(maxPoolSize)} height={20} data-label={`${(parseFloat(currentPoolSize)* 100)/parseFloat(maxPoolSize)}% Pool Filled`} />
             </div>
             {/* <Timer /> */}
             <div className='stak_info'>
-            <p>Estimated APY : <span className='text-blue'>{`330.36%`}</span></p>
-            <p>My Balance : <span className='text-blue'>{`$345`}</span> </p>
-            <p>My Stakable Balance :  <span className='text-blue'>{`$315`}</span></p>
+            <p>Estimated APY : <span className='text-blue'>{`10.36%`}</span></p>
+            <p>My Balance : <span className='text-blue'>{balance}</span> </p>
+            <p>My Stakable Balance :  <span className='text-blue'>{stakingBalance}</span></p>
             </div>  
 
             <div className='inputs'>
@@ -29,31 +250,31 @@ const Stake = () => {
             <label>Stake Your Token</label>
             </div>
             <div className="input1">
-            <input placeholder='Enter Token Amount' type="number" />
+            <input placeholder='Enter Token Amount' onChange= {(e)=> handleChange(e)} value= {amount} type="number" />
                 <div className='maxToken'>
-                <p>MAX</p>
+                <p onClick= {()=> setAmount(balance)} >MAX</p>
                 </div>
                 </div>
                 <div className='inputbox'>
-                <div>
+                {/* <div>
                 <label>Staked Token</label>
                 </div>
-                <input placeholder={`Show Staked Amount`} readOnly/>
+                <input placeholder={`Show Staked Amount`} readOnly/> */}
             </div>
             </div>
             </div>
 
 
             <div className='stak_info'>
-            <p>Claimable Token : <span className='text-blue'>{`330.36%`}</span> </p>
-            <p>My Total Claimed Token : <span className='text-blue'>{`632123`}</span></p>
-            <p>Unstake Fee : <span className='text-blue'>{`0%`}</span></p>
+            <p>Current Pool Size :  <span className='text-blue'>{currentPoolSize}</span></p>
+            {/* <p>My Total Claimed Token : <span className='text-blue'>{`632123`}</span></p>
+            <p>Unstake Fee : <span className='text-blue'>{`0%`}</span></p> */}
             </div>
             <div className='all_buttons'>
-                <button className='greenButton'>STAKE</button>
-                <button className='greenButton'>CLAIM</button>
-                <button className='greenButton'>UNSTAKE</button>
-                <button className='redbutton'>EMERGENCY UNSTAKE</button>
+                <button className='greenButton' onClick={approve} >STAKE</button>
+                <button className='greenButton'onClick={claimTokens} >CLAIM</button>
+                <button className='greenButton' onClick={unstakeTokens}>UNSTAKE</button>
+                <button className='redbutton' onClick={emergencyWithdraw}>EMERGENCY UNSTAKE</button>
             </div>
             </div>
     </div>

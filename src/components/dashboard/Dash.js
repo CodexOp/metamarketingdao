@@ -34,6 +34,7 @@ const Dash = () => {
       let _balance = await _getBalance(values.token);
       let _burn = await _getBalance(values.token, values.dead);
       setBalance(_balance);
+      console.log ("BURn:", _burn);
       setBurn(_burn);
       let _marketingWallet = await getBnbBalance(values.marketingwallet);
       let _treasuryWallet = await getBnbBalance(values.treasurywallet);
@@ -59,7 +60,7 @@ const Dash = () => {
       const tokenIn = values.token;
       const tokenOut = values.wbnb;
       
-      const amountIn = ethers.utils.parseUnits("1", 5);
+      const amountIn = ethers.utils.parseUnits("1", 9);
       let amounts = await router.getAmountsOut(amountIn, [tokenIn, tokenOut]);
       let busd = values.busd;
       let amounts2 = await router.getAmountsOut(amounts[1], [tokenOut, busd]);
@@ -113,15 +114,6 @@ const Dash = () => {
       decimals = parseInt(decimals.toString());
       supply = ethers.utils.formatUnits(supply, decimals);
       setTotalSupply(parseInt(supply));
-      let time = await token._initRebaseStartTime();
-      let timestamp = new Date().getTime();
-      timestamp = (timestamp/1000).toFixed(0);
-      console.log("Time", time.toString(), timestamp);
-      time = parseInt((timestamp- parseInt(time.toString()))/600);
-      let _power = parseInt((6*24*365)/time) + 2;
-      let _base = ((supply)/325000);
-      let _apy = Math.pow(_base, _power) * 100;
-      setAPY(_apy);
     } catch (err) {
       console.log(err);
     }
