@@ -234,7 +234,7 @@ const Stake = () => {
                 <h2>STAKE YOUR TOKEN</h2>
             </div>
             <div className='stak_bar'>
-            <Progress color="rgba(113, 41, 216, 0.9)" completed={(parseFloat(currentPoolSize)* 100)/parseFloat(maxPoolSize)} height={20} data-label={`${(parseFloat(currentPoolSize)* 100)/parseFloat(maxPoolSize)}% Pool Filled`} />
+            <Progress color="#339CEE" completed={(parseFloat(currentPoolSize)* 100)/parseFloat(maxPoolSize)} height={20} data-label={`${(parseFloat(currentPoolSize)* 100)/parseFloat(maxPoolSize)}% Pool Filled`} />
             </div>
             {/* <Timer /> */}
             <div className='stak_info'>

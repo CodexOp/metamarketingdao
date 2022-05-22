@@ -200,9 +200,11 @@ export default function Navbar(props) {
                   />
                   </a>
 
+                  <p className="mobile_logo">META MARKETING</p>
+
                 
                 </div>
-            
+
               </div>
               <div className="buttonblock">
             
@@ -229,10 +231,21 @@ export default function Navbar(props) {
 
           <Disclosure.Panel className="lg:hidden panel">
             <div className="px-2 pt-2 pb-3 space-y-1">
-            <a href={websiteUrl} className="logo-container">
- <img src={logo} alt='logo' className='logo'/>
- </a>
+                
+            <div className="flex-shrink-0 flex items-center logo_mob disclose_logo">
+                  <a href={websiteUrl}>
+                  <img
+                    className="block lg:hidden h-8 w-auto pl-10 logoimg logoimg_disclose"
+                    src={logo}
+                    alt="Workflow"
+                    
+                  />
+                  </a>
 
+                  <p className="mobile_logo_disclose">META MARKETING</p>
+
+                
+                </div>
             <Tabs 
         orientation="vertical"
         variant="scrollable"
@@ -287,7 +300,7 @@ export default function Navbar(props) {
   <a href={websiteUrl}>
 <img src={logo} alt='logo' className='logo'/>
 </a>
-<p className='logo_text'>METAMARKETING</p>
+<p className='logo_text'>META MARKETING</p>
 
       <div className='left_content'>
        

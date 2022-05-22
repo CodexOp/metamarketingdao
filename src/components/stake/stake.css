@@ -98,7 +98,7 @@
 
 
 .text-blue{
-    color:rgba(113, 41, 216, 0.9);
+    color:#339CEE;
 }
 
 .all_buttons button{
@@ -138,7 +138,7 @@ color: #fff;
    height: 40px;
    outline: none;
    border: none;
-   padding-left: 10px;
+   padding-left: 20px;
    font-size: 16px;
    margin: 10px 0;
    border-radius: 50px;
@@ -166,7 +166,7 @@ color: #fff;
     padding: 8px 20px;
     cursor: pointer;
     display: flex;
-    background-color: rgba(113, 41, 216, 0.9);
+    background-color: #339CEE;
     align-items: center;
     border-radius: 0 50px 50px 0;
    
@@ -174,7 +174,7 @@ color: #fff;
 }
 
 .greenButton{
-    background-color: rgba(113, 41, 216, 0.9);
+    background-color: #339CEE !important;
     border:1px solid rgba(255,255,255,0.3);
     border-radius: 10px;
     color:#fff;

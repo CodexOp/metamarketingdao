@@ -1,7 +1,7 @@
 #headlessui-disclosure-panel-2, #headlessui-disclosure-panel-6{
     height: 100vh !important;
     position: fixed;
-    background: rgba(0,0,0,1);
+    background: #12151F;
     width: 70% !important;
     top:0;
     padding-top: 30px;
@@ -13,7 +13,7 @@
     .buynowbutton{
 display: none; 
 padding: 0.5rem; 
-border:1px solid #6A45B7;
+border:1px solid #339CEE;
 padding-left: 1rem;
 font-size: 18px;
 padding-right: 1rem; 
@@ -30,7 +30,7 @@ transition: all 0.3s ease-in-out;
     }
 
 .buynowbutton:hover{
-    background: #7854E0;
+    background: #339CEE;
 }
 
     .buttonblock{
@@ -58,32 +58,62 @@ margin-right: 30px;
 }
 
 .icon_nav:hover{
-    color: #7854E0;
-    padding-left: 15px;
+    color: #339CEE;
+    padding-left:15px;
+    position: relative;
 }
 
 
 .icon_nav{
     width: 80% ;
     justify-content: flex-start !important;
-    text-align: center;
+    text-align: left;
 
+}
+
+.mobile_logo_disclose{
+    padding-left: 10px !important;
+    color: #fff !important;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+
+.mobile_logo{
+    padding-left: 10px !important;
+    color: #fff !important;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+@media(min-width:1224px){
+    .mobile_logo{
+        display: none;
+    }
+      
 }
 
 .extra_task h2{
     font-size: 20px !important; 
 }
 
+.extra_task:hover{
+    padding-left: 30px !important;
+}
+
 @media (max-width:1000px) {
     .icon_nav{
         width: 100% !important;
-        justify-content: center !important;
+        justify-content: left !important;
     }
 
+
+
     .extra_task{
-        text-align: center;
+        text-align: left;
         margin-bottom: 10px !important;
-        justify-content: center !important;
+        justify-content: left !important;
     }
     .trui a{
         justify-content: center !important;
@@ -106,6 +136,9 @@ margin-right: 30px;
     }
 }
 
+.mobile_logo_disclose{
+    display: block !important;
+}
 
 .extra_task{
     padding-left: 20px !important;
@@ -132,7 +165,7 @@ margin-right: 30px;
 
 
 .swap_size:hover{
-    color: #7854E0;
+    color: #339CEE;
 
 }
 
@@ -144,7 +177,7 @@ margin-left: 0.5rem;
 transition-duration: 300ms; 
 font-weight: 600; 
 font-size: 18px;
-background-color: rgba(113, 41, 216, 0.9);
+background-color: #339CEE;
 color: #fff;
 border: 0;
 outline: none;
@@ -153,7 +186,7 @@ border-radius: 0.5rem;
 }
 
 .connect_button:hover{
-    background: #7854E0;
+    background: #2246E7;
 }
 
 
@@ -176,15 +209,16 @@ a{
 
     .logoimg{
         display: block; 
-        padding-left: 2.5rem; 
+        padding-left: 3rem; 
         width: auto; 
-        height: 2rem; 
+        height: 2.5rem; 
         margin-left: 20px;
         
         
         
         @media (min-width: 1224px) { 
           display: none; 
+          
          }
         
             }
@@ -278,6 +312,28 @@ padding-top:50px !important;
         
     }
     
+    .disclose_logo{
+        margin-bottom: 30px;
+        margin-top: 20px;
+
+        img{
+            display: block !important;
+        }
+    }
+
+
+    @media(max-width:450px){
+
+        .logoimg_disclose{
+            padding-left: 1rem !important; 
+            
+        }
+
+        .icon_nav{
+            width: 80%!important;
+        }
+    }
+
 
     #headlessui-disclosure-panel-2, .trui{
         position: fixed;
@@ -288,7 +344,7 @@ padding-top:50px !important;
       .icon_nav{
           display: flex;
           gap:10px;
-          width: 60% !important;
+          width: 65% !important;
           margin: auto;
           align-items: center !important;
       }
@@ -321,7 +377,7 @@ padding-top:50px !important;
     
     
      .Mui-selected{
-        color: #7854E0 !important;
+        color: #339CEE !important;
         opacity: 0.8;
     }
     
@@ -413,8 +469,7 @@ padding-top:50px !important;
     
     .trui{
         position: fixed;
-        padding-top: 40px;
-        border-right: 2px solid rgba(255,255,255,0.5) !important;
+        border-right: 2px solid rgba(255,255,255,0.2) !important;
         width:300px;
         height: 100% !important;
 
@@ -431,5 +486,11 @@ padding-top:50px !important;
     }
 
 
-
     
+
+    @media(max-width:450px){
+        .mobile_logo{
+            display: none ;
+            
+        }
+    }
