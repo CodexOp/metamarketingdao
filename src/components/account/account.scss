@@ -75,6 +75,11 @@ border:0.1px solid rgba(51, 156, 238, 0.15);
 margin-right: 1%;
 margin-top:1.3rem;
 padding: 20px;
+transition: all 0.3s ease-in-out;
+}
+
+.inner_block3:hover{
+    transform: scale(1.05);
 }
 
 #vertical-tabpanel-0{

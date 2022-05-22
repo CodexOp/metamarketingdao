@@ -56,7 +56,7 @@ function a11yProps(index) {
   };
 }
 
-let swapUrl = "https://app.bogged.finance/bsc/swap?tokenIn=BNB&tokenOut=0x4AeC6456B758f7eE4d12383cadEfD65de5312Df1";
+let swapUrl = "https://app.bogged.finance/bsc/swap?tokenIn=BNB&tokenOut=0x7E468E4b2fc43551fDd35B2196E094a421531129";
 let docsUrl = "https://amber-protocol.gitbook.io/copy-of-amber-protocol/";
 
 
@@ -244,7 +244,7 @@ export default function Navbar(props) {
 
                   <p className="mobile_logo_disclose">META MARKETING</p>
 
-                
+
                 </div>
             <Tabs 
         orientation="vertical"

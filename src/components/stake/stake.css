@@ -102,6 +102,10 @@
 
 .text-blue{
     color:#339CEE;
+    
+}
+.stak_info p{
+    font-size: 18px !important;
 }
 
 .all_buttons button{
@@ -132,7 +136,7 @@ width: 40%;
 }
 
 .inputbox label{
-font-size: 18px;
+font-size: 20px;
 color: #fff;
 }
 
@@ -176,6 +180,10 @@ color: #fff;
 
 }
 
+.text-red{
+    color:#ff0000 !important;
+}
+
 .greenButton{
     background-color: #339CEE !important;
     border:1px solid rgba(255,255,255,0.3);
@@ -184,19 +192,28 @@ color: #fff;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
 
+.greenButton:hover{
+    background-color: #2246E7 !important;
 }
 
 
 .redbutton{
- background-color: #ff0000;
+ background-color: #DC143C;
     border:1px solid rgba(255,255,255,0.3);
     border-radius: 10px;
     font-weight: bold;
     color:#fff;
     font-size: 16px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
 
+}
+
+.redbutton:hover{
+    background-color: #ff0000;
 }
 
 

@@ -19,7 +19,7 @@ const Stake = () => {
   let [currentPoolSize, setCurrentPoolSize] = React.useState(0);
   let [maxPoolSize, setMaxPoolSize] = React.useState(0);
   let [timeLock, setTimeLock] = React.useState(0);
-
+  let [myerror, setmyerror] = React.useState()
   let _provider = React.useContext (provider);
   let _setProvider = React.useContext (setProvider);
   let _signer = React.useContext (signer);
@@ -267,6 +267,8 @@ const Stake = () => {
 
             <div className='stak_info'>
             <p>Current Pool Size :  <span className='text-blue'>{currentPoolSize}</span></p>
+            <p className='text-red'> {myerror}</p>
+            
             {/* <p>My Total Claimed Token : <span className='text-blue'>{`632123`}</span></p>
             <p>Unstake Fee : <span className='text-blue'>{`0%`}</span></p> */}
             </div>
