@@ -263,8 +263,8 @@ export default function Navbar(props) {
             const close = document.getElementById('headlessui-disclosure-button-1')
             close.click();
       }} {...a11yProps(4)} />
-        <a href='https://snapshot.org/#/metamarketingdao.eth' target="_blank"><div className='icon_nav'><Ai.AiOutlineBulb className='icon_nav_main'/><h2 className='swap swap_size'>Vote</h2></div></a>
-        <a href={websiteUrl} target="_blank"><div className='icon_nav'><Ai.AiOutlineChrome className='icon_nav_main'/><h2 className='swap swap_size'>Website</h2></div></a>
+        <a href='https://snapshot.org/#/metamarketingdao.eth' target="_blank"><div className='icon_nav extra_task'><Ai.AiOutlineBulb className='icon_nav_main'/><h2 className='swap swap_size'>Vote</h2></div></a>
+        <a href={websiteUrl} target="_blank"><div className='icon_nav extra_task'><Ai.AiOutlineChrome className='icon_nav_main'/><h2 className='swap swap_size'>Website</h2></div></a>
 
 
        
@@ -287,6 +287,7 @@ export default function Navbar(props) {
   <a href={websiteUrl}>
 <img src={logo} alt='logo' className='logo'/>
 </a>
+<p className='logo_text'>METAMARKETING</p>
 
       <div className='left_content'>
        
@@ -302,8 +303,8 @@ export default function Navbar(props) {
         <Tab label={<div className="icon_nav"><Ai.AiFillDashboard className='icon_nav_main'/> Dashboard</div>} {...a11yProps(0)} />
         <Tab label={<div className="icon_nav"><Ai.AiFillAccountBook className='icon_nav_main'/> Account</div>}  {...a11yProps(1)} />
         <Tab label={<div className="icon_nav"><Ai.AiFillThunderbolt className='icon_nav_main'/> Stake</div>}  {...a11yProps(4)} />
-        <a href='https://snapshot.org/#/metamarketingdao.eth' target="_blank"><div className='icon_nav'><Ai.AiOutlineBulb className='icon_nav_main'/><h2 className='swap swap_size'>Vote</h2></div></a>
-        <a href={websiteUrl} target="_blank"><div className='icon_nav'><Ai.AiOutlineGlobal className='icon_nav_main'/><h2 className='swap swap_size'>Website</h2></div></a>
+        <a href='https://snapshot.org/#/metamarketingdao.eth' target="_blank"><div className='icon_nav extra_task'><Ai.AiOutlineBulb className='icon_nav_main'/><h2 className='swap swap_size'>Vote</h2></div></a>
+        <a href={websiteUrl} target="_blank"><div className='icon_nav extra_task'><Ai.AiOutlineGlobal className='icon_nav_main '/><h2 className='swap swap_size'>Website</h2></div></a>
         <div className='socials'>
         <a href="https://t.me/MetaMarketingDAO"> <FaTelegram className='social_icon'/></a>
         <a href="https://twitter.com/MetaMktingDAO"> <Ai.AiFillTwitterCircle className='social_icon'/> </a>
