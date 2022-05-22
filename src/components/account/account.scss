@@ -7,7 +7,7 @@
     margin: auto;
 }
 .card_value_acc h2{
-    font-size: 2.0rem !important;
+    font-size: 1.5rem !important;
 }
 
 .block4{
@@ -51,19 +51,6 @@ color: #fff;
 
 }
 
-.block1{
-    width: 100%;
-    border:1px solid rgba(255,255,255,0.4);
-    display: flex;
-    flex-wrap: wrap;
-    border-radius: 10px;
-}
-
-.inner_block1{
-    color: #fff;
-    width: 33%;
-    padding: 13px 0;
-}
 
 .block2{
     width: 100%;
@@ -123,13 +110,7 @@ padding: 20px;
         }
     }
 
-    .card_value{
-        h2{
-            color: rgba(113, 41, 216, 0.9);
-            font-size: 2rem;
-            font-weight: 700;
-        }
-    }
+
 
 }
 
@@ -143,6 +124,11 @@ padding: 20px;
         display: none;
     }
     
+    .card_title h2{
+        font-size: 18px;
+    }
+
+  
 
     .right_content{
         width: 100% !important;

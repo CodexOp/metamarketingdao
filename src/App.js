@@ -6,7 +6,7 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import contract_abi from './tokenAbi.json';
 import routerAbi from './routerAbi.json';
-
+import './App.css'
 const myaddress = createContext();
 
 function App(){

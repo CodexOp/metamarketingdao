@@ -14,12 +14,15 @@
     .buynowbutton{
 display: none; 
 padding: 0.5rem; 
+border:1px solid #6A45B7;
 padding-left: 1rem;
 font-size: 18px;
 padding-right: 1rem; 
 transition-duration: 300ms; 
 font-weight: 600; 
 border-radius: 0.5rem; 
+transition: all 0.3s ease-in-out;
+
 
 @media (min-width: 640px) { 
   display: block; 
@@ -27,6 +30,9 @@ border-radius: 0.5rem;
 
     }
 
+.buynowbutton:hover{
+    background: #7854E0;
+}
 
     .buttonblock{
     display: flex; 
@@ -44,6 +50,25 @@ margin-right: 30px;
 
 }
 
+.icon_nav, .swap_size{
+    transition: all 0.3s ease-in-out;
+}
+
+.swap_size{
+    margin-top: 10px;
+
+}
+
+.icon_nav:hover{
+    color: #7854E0;
+    padding-left: 15px;
+
+}
+
+.swap_size:hover{
+    color: #7854E0;
+
+}
 
 .connect_button{
 padding: 0.5rem; 
@@ -57,9 +82,12 @@ background-color: rgba(113, 41, 216, 0.9);
 color: #fff;
 border: 0;
 outline: none;
+height: 45px;
 border-radius: 0.5rem; 
+}
 
-
+.connect_button:hover{
+    background: #7854E0;
 }
 
 
@@ -225,7 +253,7 @@ padding-top:50px !important;
     
     
      .Mui-selected{
-        color: rgba(113, 41, 216, 1) !important;
+        color: #7854E0 !important;
         opacity: 0.8;
     }
     

@@ -102,21 +102,7 @@ color: #fff;
 
 }
 
-.block1{
-    width: 98%;
-    border:1px solid rgba(255,255,255,0.4);
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 1% !important;
-    margin-right: 1% !important;
-    border-radius: 10px;
-}
 
-.inner_block1{
-    color: #fff;
-    width: 33%;
-    padding: 13px 0;
-}
 
 
 
@@ -198,12 +184,5 @@ padding: 20px;
         padding: 0;
     }
 
-    .card_value{
-        h2{
-            color: rgba(113, 41, 216, 1);
-            font-size: 1.3rem !important;
-            font-weight: 700;
-            
-        }
-    }
+  
 }

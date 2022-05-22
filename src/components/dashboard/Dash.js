@@ -205,7 +205,7 @@ const Dash = () => {
         <div className="inner_block1">
         <div className='dashboard-card'>
             <div className='card_title'>
-            <h2>Market Value of Treasury Asset</h2>
+            <h2>Treasury Asset</h2>
             </div>
             <div className="card_value">
             <h2>${price}</h2>

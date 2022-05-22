@@ -130,6 +130,7 @@ width: 40%;
 
 .inputbox label{
 font-size: 18px;
+color: #fff;
 }
 
 .inputbox input{
@@ -140,7 +141,12 @@ font-size: 18px;
    padding-left: 10px;
    font-size: 16px;
    margin: 10px 0;
-   
+   border-radius: 50px;
+
+}
+
+.inputbox{
+    margin-top: 10px !important;
 
 }
     
@@ -162,6 +168,7 @@ font-size: 18px;
     display: flex;
     background-color: rgba(113, 41, 216, 0.9);
     align-items: center;
+    border-radius: 0 50px 50px 0;
    
 
 }
@@ -231,21 +238,28 @@ font-size: 18px;
     width: 48%;  
     }
 
+    .stak_info p {
+        font-size: 20px;
+    }
     
+
+    .landing{
+        background-color: transparent !important;
+    }
 
 }
 
 
 
 
-@media(max-width:400px){
+@media(max-width:450px){
     .all_buttons button{
         padding: 10px 0px;
-        width: 48%;  
+        width: 45%;  
         }
 
         .stak_box{
-            padding: 40px 30px;
+            padding: 40px 0px;
         }
 
         .logo_container h2{
@@ -260,5 +274,16 @@ font-size: 18px;
     .connect_wallet_container{
         margin-right: 20px;
 
+    }
+
+    .all_buttons{
+        width: 90%;
+    }
+
+    .landing{
+        width: 100% !important;
+    }
+    .stak_info p {
+        font-size: 18px;
     }
 }
