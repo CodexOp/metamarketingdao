@@ -1,163 +1,144 @@
 import * as React from 'react'
 import './dash.scss'
+import {provider, setProvider, signer, setSigner} from '../../App';
+import values from "../../values.json"
+import routerAbi from '../../abi/router.json'
+import tokenAbi from '../../abi/token.json'
+import addresses from '../../abi/addresses.json'
 import { ethers } from "ethers";
-import routerAbi from '../../routerAbi.json';
-import tokenAbi from '../../tokenAbi.json';
 
 const Dash = () => {
-
   let [price, setPrice] = React.useState(0);
-  let [rebaseTime, setRebaseTime] = React.useState(0);
+  let [balance, setBalance] = React.useState(0);
+  let [burn, setBurn] = React.useState(0);
   let [totalSupply, setTotalSupply] = React.useState(0);
-  let [treasury, setTreasury] = React.useState(0);
-  let [insurance, setInsurance] = React.useState(0);
-  let [poolValue, setPoolValue] = React.useState(0);
-  let [firepit, setFirepit] = React.useState(0);
+  let [apy, setAPY] = React.useState(0);
+  let [currencyExchange, setCurrencyExchange] = React.useState(0);
+  let [marketingWallet, setMarketingWallet] = React.useState(0);
+  let [treasuryWallet, setTreasuryWallet] = React.useState(0);
+  let [poolBalance, setPoolBalance] = React.useState(0);
 
-  // React.useEffect(() => {
-  //   try{
-  //   getPrice();
-  //   getRebaseTime();
-  //   getTotalSupply();
-  //   getTreasury();
-  //   getInsurance();
-  //   getPoolValue();
-  //   getFirepit();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, []); 
+  let [connectedWallet, setConnectedWallet] = React.useState(false);
+  let [walletAddress, setWalletAddress] = React.useState("");
 
-  // async function getPrice(){
-  //   let rpcUrl = "https://bsc-dataseed1.defibit.io/";
-  //   let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
-  //   let router = new ethers.Contract(
-  //     '0x10ED43C718714eb63d5aA57B78B54704E256024E',
-  //     routerAbi,
-  //     provider_
-  //   );
-  //   const tokenIn = '0x4AeC6456B758f7eE4d12383cadEfD65de5312Df1';
-  //   const tokenOut = "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c";
-  //   const amountIn = "100000";
-  //   let amounts = await router.getAmountsOut(amountIn, [tokenIn, tokenOut]);
-  //   let busd = '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56';
-  //   let amounts2 = await router.getAmountsOut(amounts[1], [tokenOut, busd]);
-  //   console.log(`
-  //       Buying new token
-  //       =================
-  //       tokenIn: ${ethers.utils.formatEther(amountIn.toString())} ${tokenIn} (Amber)
-  //       tokenOut: ${ethers.utils.formatEther(amounts2[1].toString())} ${busd} (BUSD)
-  //     `);
-  //   setPrice(parseFloat(ethers.utils.formatEther(amounts2[1].toString())).toFixed(2));
-  // }
+  let _provider = React.useContext (provider);
+  let _setProvider = React.useContext (setProvider);
+  let _signer = React.useContext (signer);
+  let _setSigner = React.useContext (setSigner);
 
-  // async function getRebaseTime (){
-  //   let rpcUrl = "https://bsc-dataseed1.defibit.io/";
-  //   let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
-  //   let token = new ethers.Contract(
-  //     '0x4AeC6456B758f7eE4d12383cadEfD65de5312Df1',
-  //     tokenAbi,
-  //     provider_
-  //   );
-  //   let time = await token._lastRebasedTime();
-  //   let timestamp = new Date().getTime();
-  //   timestamp = (timestamp/1000).toFixed(0);
-  //   console.log("Time", time.toString(), timestamp);
-  //   time = timestamp- parseInt(time.toString());
-  //   time = (15*60) - time;
-  //   if (time<0) time = timestamp;
-  //   setRebaseTime(time);
-    
-  //   let updateTime = setInterval(() => {
-  //     setRebaseTime((value) => {
-  //       if (value <=0)return 0;
-  //       return value -1;
-  //     });
-  //   }, 1000);
-  // }
+  React.useEffect(() => {
 
-  // async function getTotalSupply (){
-  //   let rpcUrl = "https://bsc-dataseed1.defibit.io/";
-  //   let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
-  //   let token = new ethers.Contract(
-  //     '0x4AeC6456B758f7eE4d12383cadEfD65de5312Df1',
-  //     tokenAbi,
-  //     provider_
-  //   );
-  //   let supply = await token.totalSupply();
-  //   supply = supply.div('100000');
-  //   console.log("Supply", supply.toString());
-  //   setTotalSupply(parseInt(supply));
-  // }
+    async function fetchData(){
+      getPrice();
+      getTotalSupply();
+      let _balance = await _getBalance(values.token);
+      let _burn = await _getBalance(values.token, values.dead);
+      setBalance(_balance);
+      console.log ("BURn:", _burn);
+      setBurn(_burn);
+      let _marketingWallet = await getBnbBalance(values.marketingwallet);
+      let _treasuryWallet = await getBnbBalance(values.treasurywallet);
+      let _poolBalance = await getBnbBalance(values.pool);
 
-  // async function getTreasury(){
-  //   let accountBalance = await getEthBalance("0x86aAAba69a458C8072582cF219Eb0d232724Eb7E");
-  //   setTreasury(accountBalance);
-  // }
+      setMarketingWallet(_marketingWallet);
+      setTreasuryWallet(_treasuryWallet);
+      setPoolBalance(_poolBalance);
+    }
+    fetchData();
 
-  // async function getInsurance (){
-  //   let accountBalance = await getEthBalance("0xf66fD0237F6aB8804214174CEa53941Bff90778D");
-  //   setInsurance(accountBalance);
-  // }
+  }, [_provider, _signer]);
 
-  // async function getEthBalance (address){
-  //   let rpcUrl = "https://bsc-dataseed1.defibit.io/";
-  //   let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
-  //   let amount = await provider_.getBalance(address);
+  async function getPrice(){
+    try{
+      let rpcUrl = values.rpcUrl;
+      let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
+      let router = new ethers.Contract(
+        values.router,
+        routerAbi,
+        provider_
+      );
+      const tokenIn = values.token;
+      const tokenOut = values.wbnb;
+      
+      const amountIn = ethers.utils.parseUnits("1", 9);
+      let amounts = await router.getAmountsOut(amountIn, [tokenIn, tokenOut]);
+      let busd = values.busd;
+      let amounts2 = await router.getAmountsOut(amounts[1], [tokenOut, busd]);
+      console.log(`
+          tokenIn: ${ethers.utils.formatEther(amountIn.toString())} ${tokenIn} (safeearn)
+          tokenOut: ${ethers.utils.formatEther(amounts2[1].toString())} ${busd} (BUSD)
+        `);
+      setPrice(parseFloat(ethers.utils.formatEther(amounts2[1].toString())).toFixed(8));
+      setCurrencyExchange(parseFloat(ethers.utils.formatEther(amounts2[1].toString())).toFixed(8));
+    } catch (err) {
+      console.log (err);
+    }
+  }
 
-  //   return convertEthToUsd(amount);
-  // }
+  async function _getBalance (tokenAddress, accountAddress){
+    try {
+      let rpcUrl = values.rpcUrl;
+      let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
+      let token = new ethers.Contract(
+        tokenAddress,
+        tokenAbi,
+        provider_
+      );
+      if (!accountAddress){
+        accountAddress = await _signer.getAddress();
+      }
+      let balance = await token.balanceOf (accountAddress);
+      let decimals = await token.decimals();
+      decimals = parseInt(decimals.toString());
+      balance = ethers.utils.formatUnits(balance, decimals);
+      console.log ("balance", balance.toString());
+      return parseFloat(balance.toString()).toFixed(2);
+    } catch (err){
+      console.log (err, tokenAddress);
+      return 0;
+    }
+  }
 
-  // async function convertEthToUsd (amount){
-  //   let rpcUrl = "https://bsc-dataseed1.defibit.io/";
-  //   let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
-  //   let router = new ethers.Contract(
-  //     '0x10ED43C718714eb63d5aA57B78B54704E256024E',
-  //     routerAbi,
-  //     provider_
-  //   );
-  //   const bnb = "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c";
-  //   let busd = '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56';
-  //   let amounts = await router.getAmountsOut(amount, [bnb, busd]);
-  //   console.log("EthBalance", ethers.utils.formatEther(amounts[1].toString()));
-  //   return parseFloat(ethers.utils.formatEther(amounts[1].toString())).toFixed(2);
-  // }
+  async function getTotalSupply (){
+    try{
+      let rpcUrl = values.rpcUrl;
+      let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
+      let token = new ethers.Contract(
+        values.token,
+        tokenAbi,
+        provider_
+      );
+      let supply = await token.totalSupply();
+      console.log("Supply", supply.toString());
+      let decimals = await token.decimals();
+      decimals = parseInt(decimals.toString());
+      supply = ethers.utils.formatUnits(supply, decimals);
+      setTotalSupply(parseInt(supply));
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  // async function getPoolValue (){
-  //   try {
-  //     let rpcUrl = "https://bsc-dataseed1.defibit.io/";
-  //     let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
-  //     let token = new ethers.Contract(
-  //       '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-  //       tokenAbi,
-  //       provider_
-  //     );
-  //     let balance = await token.balanceOf ('0xbd20D46eF6edd23731e0414b51e0B6c3BdD324f8');
-  //     let amount = await convertEthToUsd (balance);
-  //     setPoolValue(amount);
-  //     console.log ("balance", amount.toString());
-  //   } catch (err){
-  //     console.log (err);
-  //   }
-  // }
-
-  // async function getFirepit (){
-  //   try {
-  //     let rpcUrl = "https://bsc-dataseed1.defibit.io/";
-  //     let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
-  //     let token = new ethers.Contract(
-  //       '0x4AeC6456B758f7eE4d12383cadEfD65de5312Df1',
-  //       tokenAbi,
-  //       provider_
-  //     );
-  //     let balance = await token.balanceOf ('0xe906200FAC8Fa29d871e5CBBB4164d0037017953');
-  //     setFirepit(parseFloat(balance.div('100000')));
-  //     console.log ("Firepit", balance.toString());
-  //   } catch (err){
-  //     console.log (err);
-  //   }
-  // }
-
+  async function getBnbBalance (_address) {
+    try{
+      let rpcUrl = values.rpcUrl;
+      let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
+      let _balance = await provider_.getBalance(_address);
+      let router = new ethers.Contract(
+        values.router,
+        routerAbi,
+        provider_
+      );
+      const tokenIn = values.wbnb;
+      
+      let busd = values.busd;
+      let amounts2 = await router.getAmountsOut(_balance, [tokenIn, busd]);
+      return (parseFloat(ethers.utils.formatEther(amounts2[1].toString())).toFixed(8));
+    }catch (err) {
+      console.log (err);
+      return 0;
+    }
+  }
 
   return (
     <div className='container container_dashboard'>
@@ -168,7 +149,7 @@ const Dash = () => {
             <h2>Token Price</h2>
             </div>
             <div className="card_value">
-             <h2>${price}</h2>
+             <h2>${parseFloat(price).toFixed(3)}</h2>
             </div>
           </div>
         </div>
@@ -178,7 +159,7 @@ const Dash = () => {
             <h2>Market Cap</h2>
             </div>
             <div className="card_value">
-             <h2>${(totalSupply * price).toFixed(2)}</h2>
+             <h2>${parseInt(price * totalSupply).toLocaleString()}</h2>
             </div>
           </div>
         </div>
@@ -188,7 +169,7 @@ const Dash = () => {
             <h2>Circulating Supply</h2>
             </div>
             <div className="card_value">
-             <h2>{(0.8636 * totalSupply).toFixed(2)}</h2>
+             <h2>{parseFloat((0.8636 * totalSupply).toFixed(2)).toLocaleString()}</h2>
             </div>
           </div>
         </div>
@@ -205,10 +186,10 @@ const Dash = () => {
         <div className="inner_block1">
         <div className='dashboard-card'>
             <div className='card_title'>
-            <h2>Treasury Asset</h2>
+            <h2>Pool Value</h2>
             </div>
             <div className="card_value">
-            <h2>${price}</h2>
+            <h2>${poolBalance}</h2>
             </div>
           </div>
         </div>
@@ -218,7 +199,7 @@ const Dash = () => {
             <h2>Total Supply</h2>
             </div>
             <div className="card_value">
-             <h2>{totalSupply.toFixed(2)}</h2>
+             <h2>{totalSupply.toLocaleString()}</h2>
             </div>
           </div>
         </div>
@@ -236,7 +217,7 @@ const Dash = () => {
             <div className='card_title'>
             <h2>Your Balance</h2>
             <div className="card_value">
-             <h2>${poolValue}</h2>
+             <h2>{balance} MMD</h2>
             </div>
             </div>
             <div className="card_value">
@@ -247,10 +228,10 @@ const Dash = () => {
       <div className='inner_block2'>
       <div className='dashboard-card'>
             <div className='card_title'>
-            <h2>Total Token burned</h2>
+            <h2>Total Tokens burned</h2>
             </div>
             <div className="card_value">
-             <h2>${treasury}</h2>
+             <h2>{parseFloat(burn).toLocaleString()} MMD</h2>
             </div>
           </div>
       </div>
@@ -265,10 +246,10 @@ const Dash = () => {
       <div className='inner_block2'>
       <div className='dashboard-card'>
             <div className='card_title'>
-            <h2>Pool Value</h2>
+            <h2>Treasury Wallet Balance</h2>
             </div>
             <div className="card_value">
-             <h2>${poolValue}</h2>
+             <h2>${parseFloat(treasuryWallet).toLocaleString()}</h2>
             </div>
           </div>
       </div>
@@ -279,7 +260,7 @@ const Dash = () => {
             <h2>Marketing Wallet Balance</h2>
             </div>
             <div className="card_value">
-             <h2>${insurance}</h2>
+             <h2>${parseFloat(marketingWallet).toLocaleString()}</h2>
             </div>
           </div>
       </div>
