@@ -161,7 +161,17 @@ export default function Navbar(props) {
     setValue(newValue);
   };
 
- 
+  function disconnectWallet () {
+    try{
+      web3ModalRef.current.clearCachedProvider();
+      window.localStorage.clear();
+      setConnectedWallet(false);
+      setWalletAddress('Connect')
+
+    }catch(err){
+      console.log(err);
+    }
+  }
 
   return (
     <Disclosure as="nav" className="bg-[#000]">
@@ -209,7 +219,7 @@ export default function Navbar(props) {
                 <>Connect</>}</button>
 
                { connectedWallet ? 
-                <div className="logout" onClick={window.localStorage.clear()}>logout</div>
+                <div className="logout" onClick={(e) => disconnectWallet()}>logout</div>
                 :
                 <></>}
               </div>
