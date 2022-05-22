@@ -20,7 +20,6 @@ const Dash = () => {
 
   let [connectedWallet, setConnectedWallet] = React.useState(false);
   let [walletAddress, setWalletAddress] = React.useState("");
-
   let _provider = React.useContext (provider);
   let _setProvider = React.useContext (setProvider);
   let _signer = React.useContext (signer);

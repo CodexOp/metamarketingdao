@@ -160,6 +160,9 @@ export default function Navbar(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+ 
+
   return (
     <Disclosure as="nav" className="bg-[#000]">
       {({ open }) => (
@@ -204,6 +207,11 @@ export default function Navbar(props) {
                 >{(connectedWallet)? <>{walletAddress.slice(0, 6) + "..."}</>
                 :
                 <>Connect</>}</button>
+
+               { connectedWallet ? 
+                <div className="logout" onClick={window.localStorage.clear()}>logout</div>
+                :
+                <></>}
               </div>
             </div>
           </div>

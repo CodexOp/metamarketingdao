@@ -51,7 +51,7 @@ margin-right: 30px;
 }
 
 .icon_nav, .swap_size{
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out ;
 }
 
 .swap_size{
@@ -64,6 +64,23 @@ margin-right: 30px;
     padding-left: 15px;
 
 }
+
+.logout{
+    color: #fff !important;
+    position: absolute;
+    bottom: -10px;
+    right: 13%;
+    transition: all 0.3s ease 2s;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.connect_button:hover + .logout{
+    visibility: visible;
+    transition: all 0.3s ease 0s;
+
+}
+
 
 .swap_size:hover{
     color: #7854E0;
