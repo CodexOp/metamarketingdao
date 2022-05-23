@@ -200,7 +200,7 @@ export default function Navbar(props) {
                   />
                   </a>
 
-                  <p className="mobile_logo">META MARKETING</p>
+                  <p className="mobile_logo">METAMARKETING</p>
 
                 
                 </div>
@@ -242,7 +242,7 @@ export default function Navbar(props) {
                   />
                   </a>
 
-                  <p className="mobile_logo_disclose">META MARKETING</p>
+                  <p className="mobile_logo_disclose">METAMARKETING</p>
 
 
                 </div>
@@ -300,7 +300,7 @@ export default function Navbar(props) {
   <a href={websiteUrl}>
 <img src={logo} alt='logo' className='logo'/>
 </a>
-<p className='logo_text'>META MARKETING</p>
+<p className='logo_text'>METAMARKETING</p>
 
       <div className='left_content'>
        
