@@ -3,7 +3,5 @@
 
 body{
     font-family: 'Poppins', sans-serif !important;
-    background: url('./images/bg.jpg');
-    background-size: cover;
-    background-repeat: repeat;
+    background: #12151F !important;
 }

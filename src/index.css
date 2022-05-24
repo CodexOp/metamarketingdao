@@ -8,7 +8,7 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  background: rgba(0,0,0,100);
+  background: #12151F !important;
   -moz-osx-font-smoothing: grayscale;
 }
 

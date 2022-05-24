@@ -5,6 +5,10 @@ import { Contract, ethers, providers } from "ethers";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import './App.css'
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
+
+
 let provider = createContext();
 let setProvider = createContext();
 let signer = createContext();
@@ -18,8 +22,21 @@ function App(){
   let [_signer, _setSigner] = useState("Hellow signer");
   let [_walletAddress, _setWalletAddress] = useState("");
 
+  const particlesInit = async (main) => {
+    console.log(main);
+
+    // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
+    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+    // starting from v2 you can add only the features you need reducing the bundle size
+    await loadFull(main);
+  };
+
+  const particlesLoaded = (container) => {
+    console.log(container);
+  };
   return (
     <div>
+
       <provider.Provider value ={_provider}>
       <setProvider.Provider value ={_setProvider}>
       <signer.Provider value ={_signer}>
