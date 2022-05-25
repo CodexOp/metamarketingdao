@@ -57,7 +57,6 @@ function a11yProps(index) {
 }
 
 let swapUrl = "https://app.bogged.finance/bsc/swap?tokenIn=BNB&tokenOut=0x7E468E4b2fc43551fDd35B2196E094a421531129";
-let docsUrl = "https://amber-protocol.gitbook.io/copy-of-amber-protocol/";
 
 
 
@@ -65,7 +64,7 @@ const navigation = [
   { name: 'Dashboard', href: '#', current: true },
   { name: 'Account', href: '#', current: false },
   { name: 'Swap', href: swapUrl, current: false },
-  { name: 'Vote & Proposal', href: 'https://snapshot.org/#/metamarketingdao.eth', current: false },
+  { name: 'Vote & Proposal', href: 'https://vote.metamarketingdao.com/#/', current: false },
 ]
 
 
@@ -276,7 +275,7 @@ export default function Navbar(props) {
             const close = document.getElementById('headlessui-disclosure-button-1')
             close.click();
       }} {...a11yProps(4)} />
-        <a href='https://snapshot.org/#/metamarketingdao.eth' target="_blank"><div className='icon_nav extra_task'><Ai.AiOutlineBulb className='icon_nav_main'/><h2 className='swap swap_size'>Vote</h2></div></a>
+        <a href='https://vote.metamarketingdao.com/#/' target="_blank"><div className='icon_nav extra_task'><Ai.AiOutlineBulb className='icon_nav_main'/><h2 className='swap swap_size'>Vote</h2></div></a>
         <a href={websiteUrl} target="_blank"><div className='icon_nav extra_task'><Ai.AiOutlineChrome className='icon_nav_main'/><h2 className='swap swap_size'>Website</h2></div></a>
 
 
@@ -316,7 +315,7 @@ export default function Navbar(props) {
         <Tab label={<div className="icon_nav"><Ai.AiFillDashboard className='icon_nav_main'/> Dashboard</div>} {...a11yProps(0)} />
         <Tab label={<div className="icon_nav"><Ai.AiFillAccountBook className='icon_nav_main'/> Account</div>}  {...a11yProps(1)} />
         <Tab label={<div className="icon_nav"><Ai.AiFillThunderbolt className='icon_nav_main'/> Stake</div>}  {...a11yProps(4)} />
-        <a href='https://snapshot.org/#/metamarketingdao.eth' target="_blank"><div className='icon_nav extra_task'><Ai.AiOutlineBulb className='icon_nav_main'/><h2 className='swap swap_size'>Vote</h2></div></a>
+        <a href='https://vote.metamarketingdao.com/#/' target="_blank"><div className='icon_nav extra_task'><Ai.AiOutlineBulb className='icon_nav_main'/><h2 className='swap swap_size'>Vote</h2></div></a>
         <a href={websiteUrl} target="_blank"><div className='icon_nav extra_task'><Ai.AiOutlineGlobal className='icon_nav_main '/><h2 className='swap swap_size'>Website</h2></div></a>
         <div className='socials'>
         <a href="https://t.me/MetaMarketingDAO"> <FaTelegram className='social_icon'/></a>
