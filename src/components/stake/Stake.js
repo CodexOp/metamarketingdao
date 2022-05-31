@@ -13,6 +13,7 @@ const Stake = () => {
   let [poolInfo, setPoolInfo] = React.useState([]);
   let [userInfo, setUserInfo] = React.useState([]);
   let [whitelistedAddresses, setWalletAddresses] = React.useState([]);
+  let [walletAddress, setWalletAddress] = React.useState("");
   let [amount, setAmount] = React.useState(0);
   let [balance, setBalance] = React.useState(0);
   let [stakingBalance, setStackingBalance] = React.useState(0);
@@ -98,6 +99,7 @@ const Stake = () => {
       );
       if (!accountAddress){
         accountAddress = await _signer.getAddress();
+        setWalletAddress(accountAddress);
       }
       let balance = await token.balanceOf (accountAddress);
       console.log ("Balalala", balance)
@@ -143,8 +145,8 @@ const Stake = () => {
       getPoolInfo();
       getUserInfo();
     }catch (error) {
-      if (error.data)
-      alert(error.data.message);
+      if (error.error)
+      alert(error.error.data.message);
       console.log (error)
     }
   }
@@ -161,9 +163,10 @@ const Stake = () => {
       getPoolInfo();
       getUserInfo();
     }catch (error) {
-      if (error.data)
-      alert(error.data.message);
-      console.log (error);
+      console.log (error.error)
+      if (error.error)
+      alert(error.error.data.message);
+      else alert("Unable to unstake")
     }
   }
 
@@ -179,9 +182,9 @@ const Stake = () => {
       getPoolInfo();
       getUserInfo();
     }catch (error) {
-      if (error.data)
-      alert(error.data.message);
-      console.log (error);
+      if (error.error)
+      alert(error.error.data.message);
+      else alert("Unable to claim")
     }
   }
 
@@ -197,9 +200,9 @@ const Stake = () => {
       getPoolInfo();
       getUserInfo();
     }catch (error) {
-      if (error.data)
-      alert (error.data.message);
-      console.log (error);
+      if (error.error)
+      alert(error.error.data.message);
+      else alert("Unable to withdraw")
     }
   }
 
@@ -210,12 +213,19 @@ const Stake = () => {
         tokenAbi,
         _signer
       );
-      let _amount = ethers.utils.parseUnits("10000000000000000000", 9);
-      let tx = await token.approve(values.stakingAddress, _amount);
-      await tx.wait();
+      let _amount = ethers.utils.parseEther("10000000000000000000");
+      console.log ("walletAddress", walletAddress)
+      let _allowance = await token.allowance(walletAddress, values.stakingAddress);
+      console.log ("Allowance: " + _allowance)
+      if (_allowance.toString().length < 3){
+        let _tx = await token.approve(values.stakingAddress, _amount);
+        await _tx.wait();
+      }
       stakeTokens()
     }catch (error) {
-      // alert(error.data.message);
+      if (error.error)
+      alert(error.error.data.message);
+      else alert("Unable to stake")
     }
   }
 

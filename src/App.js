@@ -5,7 +5,7 @@ import { Contract, ethers, providers } from "ethers";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import './App.css'
-import Particles from "react-tsparticles";
+// import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 
