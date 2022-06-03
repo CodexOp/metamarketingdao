@@ -186,7 +186,7 @@ const Account = () => {
             <h2>Your Balance</h2>
             </div>
             <div className="card_value card_value_acc">
-             <h2>${parseFloat(balance)* (parseFloat(price).toFixed(3))}</h2>
+             <h2>${(parseFloat(balance)* (parseFloat(price))).toFixed(3)}</h2>
             </div>
             <div className='card_title'>
             <h2> {balance}MMD</h2></div>

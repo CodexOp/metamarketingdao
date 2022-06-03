@@ -16,6 +16,8 @@ const Dash = () => {
   let [currencyExchange, setCurrencyExchange] = React.useState(0);
   let [marketingWallet, setMarketingWallet] = React.useState(0);
   let [treasuryWallet, setTreasuryWallet] = React.useState(0);
+  let [marketingBalance, setMarketingBalance] = React.useState(0);
+  let [treasuryBalance, setTreasuryBalance] = React.useState(0);
   let [poolBalance, setPoolBalance] = React.useState(0);
 
   let [connectedWallet, setConnectedWallet] = React.useState(false);
@@ -32,7 +34,11 @@ const Dash = () => {
       getTotalSupply();
       let _balance = await _getBalance(values.token);
       let _burn = await _getBalance(values.token, values.dead);
+      let _marketingBalance = await _getBalance(values.token, values.marketingwallet);
+      let _treasuryBalance = await _getBalance(values.token, values.treasurywallet);
       setBalance(_balance);
+      setMarketingBalance(_marketingBalance);
+      setTreasuryBalance(_treasuryBalance);
       console.log ("BURn:", _burn);
       setBurn(_burn);
       let _marketingWallet = await getBnbBalance(values.marketingwallet);
@@ -148,7 +154,7 @@ const Dash = () => {
             <h2>Token Price</h2>
             </div>
             <div className="card_value">
-             <h2>${parseFloat(price).toFixed(3)}</h2>
+             <h2>${parseFloat(price).toFixed(4)}</h2>
             </div>
           </div>
         </div>
@@ -185,10 +191,10 @@ const Dash = () => {
         <div className="inner_block1">
         <div className='dashboard-card'>
             <div className='card_title'>
-            <h2>Pool Value</h2>
+            <h2>Reward Pool Balance</h2>
             </div>
             <div className="card_value">
-            <h2>${poolBalance}</h2>
+            <h2>${parseFloat(poolBalance).toLocaleString()}</h2>
             </div>
           </div>
         </div>
@@ -248,7 +254,7 @@ const Dash = () => {
             <h2>Treasury Wallet Balance</h2>
             </div>
             <div className="card_value">
-             <h2>${parseFloat(treasuryWallet).toLocaleString()}</h2>
+             <h2>${((parseFloat(treasuryWallet)) + ((parseFloat(treasuryBalance))* parseFloat(price))).toLocaleString()}</h2>
             </div>
           </div>
       </div>
@@ -259,7 +265,7 @@ const Dash = () => {
             <h2>Marketing Wallet Balance</h2>
             </div>
             <div className="card_value">
-             <h2>${parseFloat(marketingWallet).toLocaleString()}</h2>
+             <h2>${((parseFloat(marketingWallet)) + ((parseFloat(marketingBalance))* parseFloat(price))).toLocaleString()}</h2>
             </div>
           </div>
       </div>

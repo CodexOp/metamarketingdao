@@ -27,6 +27,25 @@ const Stake = () => {
   let _setSigner = React.useContext (setSigner);
 
   React.useEffect(()=>{
+    getPoolId();
+
+    async function getPoolId(){
+      let rpcUrl = values.rpcUrl;
+      let provider_ = new ethers.providers.JsonRpcProvider(rpcUrl);
+      let staking = new ethers.Contract(
+        values.stakingAddress,
+        stakingAbi,
+        provider_
+      );
+      let _poolId = await staking.poolLength();
+      _poolId = parseInt(_poolId.toString())
+      _poolId = _poolId -1;
+      setPoolId(_poolId);
+      console.log ("PPOOOOOLLLL IIIDDD", _poolId);
+    }
+  },[])
+
+  React.useEffect(()=>{
     getPoolInfo();
     getUserInfo();
     getWhiteListAddresses();
@@ -250,7 +269,7 @@ const Stake = () => {
             <div className='stak_info'>
             <p>Estimated APY : <span className='text-blue'>{`10.36%`}</span></p>
             <p>My Balance : <span className='text-blue'>{balance}</span> </p>
-            <p>My Stakable Balance :  <span className='text-blue'>{stakingBalance}</span></p>
+            <p>My Staking Balance :  <span className='text-blue'>{stakingBalance}</span></p>
             </div>  
 
             <div className='inputs'>
